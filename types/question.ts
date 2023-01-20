@@ -1,9 +1,9 @@
-type Question = {
+export type Question = {
   question: string;
-  answers: {
-    text: string;
-    isCorrect: boolean;
-  }[];
+  answers: Answer[];
 };
 
-export default Question;
+export type Answer = {
+  text: string;
+  isCorrect: boolean;
+};
