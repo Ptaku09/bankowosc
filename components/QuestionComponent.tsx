@@ -32,7 +32,7 @@ const QuestionComponent = ({ question, index }: { question: Question; index: num
             <input {...register((index * 10 + idx).toString())} type="checkbox" id={(index * 10 + idx).toString()} className="hidden peer"></input>
             <label
               htmlFor={(index * 10 + idx).toString()}
-              className={`w-full p-2 border-[2px] border-transparent rounded-lg peer-checked:text-stone-600 transition-all duration-200 ${
+              className={`w-full p-2 border-[2px] border-transparent rounded-lg md:hover:border-blue-300 md:cursor-pointer peer-checked:text-stone-600 transition-all duration-200 ${
                 isSubmitted
                   ? `${
                       answer.isCorrect
@@ -47,8 +47,13 @@ const QuestionComponent = ({ question, index }: { question: Question; index: num
           </div>
         ))}
         <div className="w-full flex items-center justify-between font-bold">
-          <input type="submit" value="Sprawdź odpowiedź" />
-          <input type="button" onClick={() => reset()} value="Reset" />
+          <input type="submit" value="Sprawdź odpowiedź" className="md:cursor-pointer md:hover:text-yellow-400 md:transition-all md:duration-200" />
+          <input
+            type="button"
+            onClick={() => reset()}
+            value="Reset"
+            className="md:cursor-pointer md:hover:text-yellow-400 md:transition-all md:duration-200"
+          />
         </div>
       </form>
     </div>

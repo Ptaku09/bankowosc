@@ -11,7 +11,7 @@ type AnswersContextType = {
 export const StatsTrackerContext = createContext<AnswersContextType>({
   points: 0,
   answeredQuestions: 0,
-  stats: '0/0',
+  stats: '0 / 0',
   handleCorrectAnswer: () => {},
   handleIncorrectAnswer: () => {},
 });
@@ -19,12 +19,12 @@ export const StatsTrackerContext = createContext<AnswersContextType>({
 const StatsTrackerProvider = ({ children }: { children: ReactNode }) => {
   const [points, setPoints] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState(0);
-  const [stats, setStats] = useState('0/0');
+  const [stats, setStats] = useState('0 / 0');
   const [ids, setIds] = useState<Set<number>>(new Set());
 
   const handleCorrectAnswer = (id: number) => {
     if (!ids.has(id)) {
-      setStats(`${points + 1}/${answeredQuestions + 1}`);
+      setStats(`${points + 1} / ${answeredQuestions + 1}`);
       setPoints((prev: number) => prev + 1);
       setAnsweredQuestions((prev: number) => prev + 1);
       setIds((prev: Set<number>) => new Set(prev).add(id));
@@ -33,7 +33,7 @@ const StatsTrackerProvider = ({ children }: { children: ReactNode }) => {
 
   const handleIncorrectAnswer = (id: number) => {
     if (!ids.has(id)) {
-      setStats(`${points}/${answeredQuestions + 1}`);
+      setStats(`${points} / ${answeredQuestions + 1}`);
       setAnsweredQuestions((prev: number) => prev + 1);
       setIds((prev: Set<number>) => new Set(prev).add(id));
     }
