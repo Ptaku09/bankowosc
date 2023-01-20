@@ -4,6 +4,7 @@ import { Question } from '/types/question';
 import path from 'path';
 import { promises as fs } from 'fs';
 import QuestionComponent from '/components/QuestionComponent';
+import StatsWidget from '/components/StatsWidget';
 
 const albert = Albert_Sans({ weight: ['400', '700'], preload: false });
 
@@ -27,6 +28,7 @@ const Home = ({ questions }: { questions: Question[] }) => {
           <QuestionComponent key={index} question={question} index={index} />
         ))}
       </div>
+      <StatsWidget />
     </div>
   );
 };

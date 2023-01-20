@@ -24,7 +24,7 @@ const StatsTrackerProvider = ({ children }: { children: ReactNode }) => {
 
   const handleCorrectAnswer = (id: number) => {
     if (!ids.has(id)) {
-      setStats(`${points + 1}/${answeredQuestions}`);
+      setStats(`${points + 1}/${answeredQuestions + 1}`);
       setPoints((prev: number) => prev + 1);
       setAnsweredQuestions((prev: number) => prev + 1);
       setIds((prev: Set<number>) => new Set(prev).add(id));
