@@ -8,6 +8,7 @@
         box-sizing: border-box;
         overflow-x: hidden;
         scroll-behavior: smooth;
+        background: #000;
     }
 
     *, *::after, *::before {
