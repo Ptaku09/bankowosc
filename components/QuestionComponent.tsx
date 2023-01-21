@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Answer, Question } from '/types/question';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { StatsTrackerContext } from '/providers/StatsTrackerProvider';
+import Image from 'next/image';
 
 type FormInput = {
   [index: number]: boolean;
@@ -25,7 +26,14 @@ const QuestionComponent = ({ question, index }: { question: Question; index: num
 
   return (
     <div className="w-full flex flex-col gap-3 p-4 bg-stone-800 rounded-lg text-white shadow-xl">
-      <h1 className="font-bold border-b-[1px] pb-2">{question.question}</h1>
+      <div className="font-bold border-b-[1px] pb-2">
+        <h1 className="mb-2">{question.question}</h1>
+        {question.image && (
+          <div className="relative w-full h-64">
+            <Image src={question.image} fill objectFit="contain" style={{ objectFit: 'contain' }} alt={question.question} />
+          </div>
+        )}
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} id={question.question} className="flex items-start flex-col gap-3">
         {question.answers.map((answer: Answer, idx: number) => (
           <div key={index + idx} className="w-full flex items-center justify-center gap-2 text-sm">
