@@ -30,7 +30,7 @@ const QuestionComponent = ({ question, index }: { question: Question; index: num
         <h1 className="mb-2">{question.question}</h1>
         {question.image && (
           <div className="relative w-full h-64">
-            <Image src={question.image} fill objectFit="contain" style={{ objectFit: 'contain' }} alt={question.question} />
+            <Image src={question.image} fill style={{ objectFit: 'contain' }} alt={question.question} />
           </div>
         )}
       </div>
