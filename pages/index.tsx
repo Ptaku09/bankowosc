@@ -5,6 +5,7 @@ import path from 'path';
 import { promises as fs } from 'fs';
 import QuestionComponent from '/components/QuestionComponent';
 import StatsWidget from '/components/StatsWidget';
+import { useEffect, useState } from 'react';
 
 const albert = Albert_Sans({ weight: ['400', '700'], preload: false });
 
@@ -21,12 +22,22 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Home = ({ questions }: { questions: Question[] }) => {
+  const [correctlyAnswered, setCorrectlyAnswered] = useState<number[]>([]);
+
+  useEffect(() => {
+    const correctlyAnswered = localStorage.getItem('computer-networks-caq');
+
+    if (correctlyAnswered) {
+      setCorrectlyAnswered(JSON.parse(correctlyAnswered));
+    }
+  }, []);
+
   return (
     <div className={`w-screen p-5 md:grid md:grid-cols-[1fr_500px_1fr] overflow-x-hidden bg-black ${albert.className}`}>
       <div className="flex items-center flex-col gap-5 md:col-start-2">
-        {questions.map((question: Question, index: number) => (
-          <QuestionComponent key={index} question={question} index={index} />
-        ))}
+        {questions.map((question: Question, index: number) => {
+          return !correctlyAnswered.includes(index) ? <QuestionComponent key={index} question={question} index={index} /> : null;
+        })}
       </div>
       <StatsWidget />
     </div>
