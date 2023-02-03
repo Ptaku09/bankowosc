@@ -1,5 +1,5 @@
 import { Albert_Sans } from '@next/font/google';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import { Question } from '/types/question';
 import path from 'path';
 import { promises as fs } from 'fs';
@@ -11,22 +11,26 @@ import lodash from 'lodash';
 
 const albert = Albert_Sans({ weight: ['400', '700'], preload: false });
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const jsDirectory = path.join(process.cwd(), 'json');
   const fileContents = await fs.readFile(jsDirectory + '/questions.json', 'utf8');
   const questions = JSON.parse(fileContents);
-  const shuffledQuestions = lodash.shuffle(questions);
 
   return {
     props: {
-      questions: shuffledQuestions,
+      questions,
     },
   };
 };
 
 const Home = ({ questions }: { questions: Question[] }) => {
   const [correctlyAnswered, setCorrectlyAnswered] = useState<number[]>([]);
+  const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
   const { isHidden } = useContext(HideCorrectlyAnsweredContext);
+
+  useEffect(() => {
+    setShuffledQuestions(lodash.shuffle(questions));
+  }, [questions]);
 
   useEffect(() => {
     const correctlyAnswered = localStorage.getItem('computer-networks-caq');
@@ -39,7 +43,7 @@ const Home = ({ questions }: { questions: Question[] }) => {
   return (
     <div className={`w-screen p-5 md:grid md:grid-cols-[1fr_500px_1fr] overflow-x-hidden bg-black ${albert.className}`}>
       <div className="flex items-center flex-col gap-5 md:col-start-2">
-        {questions.map((question: Question) => {
+        {shuffledQuestions.map((question: Question) => {
           return correctlyAnswered.includes(question.id) && isHidden ? null : (
             <QuestionComponent key={question.id} question={question} index={question.id} />
           );
