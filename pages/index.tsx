@@ -4,7 +4,7 @@ import { Question } from '/types/question';
 import path from 'path';
 import { promises as fs } from 'fs';
 import QuestionComponent from '/components/QuestionComponent';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import WidgetBar from '/components/WidgetBar';
 import { HideCorrectlyAnsweredContext } from '/providers/HideCorrectlyAnsweredProvider';
 
