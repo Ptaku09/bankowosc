@@ -5,7 +5,7 @@ const StatsWidget = () => {
   const { stats, percentage } = useContext(StatsTrackerContext);
 
   return (
-    <div className="w-44 text-center fixed bottom-4 left-1/2 -translate-x-1/2 bg-purple-600 py-2 rounded-lg text-white font-bold border-[1px] border-white shadow-xl flex justify-around">
+    <div className="w-44 text-center bg-purple-600 py-2 rounded-lg text-white font-bold border-[1px] border-white shadow-xl flex justify-around">
       <p>{stats}</p>
       <p>
         {percentage} {parseInt(percentage.replace('%', '')) >= 50 ? '😎' : '💀'}
