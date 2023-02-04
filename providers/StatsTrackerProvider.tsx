@@ -25,13 +25,6 @@ const StatsTrackerProvider = ({ children }: { children: ReactNode }) => {
   const [percentage, setPercentage] = useState('0%');
   const [ids, setIds] = useState<Set<number>>(new Set());
 
-  const handleSaveIdToLocalStorage = (id: number) => {
-    const ids = JSON.parse(localStorage.getItem('computer-networks-caq') || '[]');
-    ids.push(id);
-
-    localStorage.setItem('computer-networks-caq', JSON.stringify(ids));
-  };
-
   const handleCorrectAnswer = (id: number) => {
     if (!ids.has(id)) {
       setStats(`${points + 1} / ${answeredQuestions + 1}`);
@@ -39,7 +32,6 @@ const StatsTrackerProvider = ({ children }: { children: ReactNode }) => {
       setPoints((prev: number) => prev + 1);
       setAnsweredQuestions((prev: number) => prev + 1);
       setIds((prev: Set<number>) => new Set(prev).add(id));
-      handleSaveIdToLocalStorage(id);
     }
   };
 
