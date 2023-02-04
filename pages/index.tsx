@@ -23,20 +23,11 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Home = ({ questions }: { questions: Question[] }) => {
-  const [correctlyAnswered, setCorrectlyAnswered] = useState<number[]>([]);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
 
   useEffect(() => {
     setShuffledQuestions(lodash.shuffle(questions));
   }, [questions]);
-
-  useEffect(() => {
-    const correctlyAnswered = localStorage.getItem('computer-networks-caq');
-
-    if (correctlyAnswered) {
-      setCorrectlyAnswered(JSON.parse(correctlyAnswered));
-    }
-  }, []);
 
   return (
     <div className={`w-screen p-5 md:grid md:grid-cols-[1fr_500px_1fr] overflow-x-hidden bg-black ${albert.className}`}>
