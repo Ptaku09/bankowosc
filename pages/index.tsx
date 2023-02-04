@@ -27,6 +27,9 @@ const Home = ({ questions }: { questions: Question[] }) => {
 
   useEffect(() => {
     setShuffledQuestions(lodash.shuffle(questions));
+    setShuffledQuestions((prevState: Question[]) =>
+      prevState.map((question: Question) => ({ ...question, answers: lodash.shuffle(question.answers) }))
+    );
   }, [questions]);
 
   return (
