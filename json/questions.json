@@ -751,11 +751,11 @@
       },
       {
         "text": "Musi być osiągalny w przypadku programu i musi być osiągalny w przypadku projektu",
-        "isCorrect": true
+        "isCorrect": false
       },
       {
         "text": "Nie musi być zdefiniowany w programie, musi być określony w projekcie",
-        "isCorrect": false
+        "isCorrect": true
       }
     ]
   },
